@@ -12,6 +12,7 @@
 	<groupId>com.pleten-chaos</groupId>
 	<artifactId>pleten-chaos</artifactId>
 	<name>pleten-chaos</name>
+	<description>Pleten-chaos project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -58,7 +59,10 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
