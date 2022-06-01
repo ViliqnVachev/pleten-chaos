@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<title>Register</title>
 	<meta charset="UTF-8">
@@ -27,13 +28,13 @@
 		<div class="container-login100">
 			<div class="center-register">
 			
-				<form class="login100-form validate-form">
+				<form th:action=@{/register} th:method="post" th:object="${newUserBinding}" class="login100-form validate-form">
 					<span class="login100-form-title">
 						Register
 					</span>
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid user is required">
-						<input class="input100" type="text" name="fname" placeholder="First Name">
+						<input th:field="*{firstName}" class="input100" type="text" name="fname" placeholder="First Name">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
@@ -41,39 +42,42 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid user is required">
-						<input class="input100" type="text" name="lname" placeholder="Last Name">
+						<input th:field="*{lastName}" class="input100" type="text" name="lname" placeholder="Last Name">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid user is required">
-						<input class="input100" type="text" name="username" placeholder="Username">
+					<small th:if="${isNotUnique}" class="error">The username is not unique</small>
+					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('username')} ? 'alert-validate' : ''" data-validate = "Valid user is required">
+						<input th:field="*{username}" class="input100" type="text" name="username" placeholder="Username">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('password')} ? 'alert-validate' : ''" data-validate = "Password is required">
+						<input th:field="*{password}" class="input100" type="password" name="pass" placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Confirm Password is required">
-						<input class="input100" type="password" name="confirmPass" placeholder="Confirm Password">
+					<small th:if="${isNotEquals}" class="error">The passwords are not equals</small>
+					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('confirmPassword')} ? 'alert-validate' : ''" data-validate = "Confirm Password is required">
+						<input th:field="*{confirmPassword}" class="input100" type="password" name="confirmPass" placeholder="Confirm Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
 					</div>
-
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email">
+					
+					<small th:if="${isNotUniqueEmail}" class="error">Email is not unique</small>
+					<div th:classappend="${#fields.hasErrors('email')} ? 'alert-validate' : ''" class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input th:field="*{email}" class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>

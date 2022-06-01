@@ -14,11 +14,9 @@ public class HomeCotnroller {
 		return ViewConstants.LOGIN_VIEW;
 	}
 
-
-
-	@GetMapping("/home")
+	@GetMapping(PathConstants.HOME)
 	public String getRegisterHome() {
-		return "home";
+		return ViewConstants.HOME_VIEW;
 	}
 
 }

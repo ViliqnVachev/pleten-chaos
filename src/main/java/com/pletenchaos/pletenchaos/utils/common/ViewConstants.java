@@ -6,4 +6,6 @@ public final class ViewConstants {
 
 	public static final String REGISTER_VIEW = "register";
 
+	public static final String HOME_VIEW = "home";
+
 }
