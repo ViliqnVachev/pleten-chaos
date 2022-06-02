@@ -1,15 +1,20 @@
 package com.pletenchaos.pletenchaos.service.impl;
 
+import java.util.Arrays;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pletenchaos.pletenchaos.model.binding.NewUserBinding;
+import com.pletenchaos.pletenchaos.model.entity.RoleEntity;
 import com.pletenchaos.pletenchaos.model.entity.UserEntity;
+import com.pletenchaos.pletenchaos.model.entity.enums.RoleEnum;
 import com.pletenchaos.pletenchaos.repository.UserRepository;
 import com.pletenchaos.pletenchaos.service.interfaces.IRoleService;
 import com.pletenchaos.pletenchaos.service.interfaces.IUserService;
 import com.pletenchaos.pletenchaos.utils.ConvertObjUtil;
+import com.pletenchaos.pletenchaos.utils.exceptions.NotFoundEntity;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -46,12 +51,21 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public boolean register(NewUserBinding newUser) {
-		UserEntity userEntity = ConvertObjUtil.convert(newUser, UserEntity.class, mapper);
+		try {
+			UserEntity userEntity = ConvertObjUtil.convert(newUser, UserEntity.class, mapper);
 
-		// first user is register as Administrator
-//		RoleEntity roleEntity = Con userRepo.count() == 0 ? roleService.findByRole(RoleEnum.ADMIN) :roleService.findByRole(RoleEnum.USER) ;
+			// first user is register as Administrator
+			RoleEntity roleEntity = ConvertObjUtil
+					.convert((userRepo.count() == 0 ? roleService.findByRole(RoleEnum.ADMIN)
+							: roleService.findByRole(RoleEnum.USER)), RoleEntity.class, mapper);
+			userEntity.setRoles(Arrays.asList(roleEntity));
+			userEntity.setStatistics(null);
 
-		return false;
+			userRepo.save(userEntity);
+		} catch (IllegalArgumentException | NotFoundEntity e) {
+			return false;
+		}
+		return true;
 	}
 
 }

@@ -2,6 +2,8 @@ package com.pletenchaos.pletenchaos.web;
 
 import javax.validation.Valid;
 
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,14 +16,17 @@ import com.pletenchaos.pletenchaos.service.interfaces.IUserService;
 import com.pletenchaos.pletenchaos.utils.common.PathConstants;
 import com.pletenchaos.pletenchaos.utils.common.ViewConstants;
 import com.pletenchaos.pletenchaos.utils.users.UserValidatorUtil;
+import com.pletenchaos.pletenchaos.web.events.EmailEvent;
 
 @Controller
 public class RegisterController {
 
 	private final IUserService userService;
+	private final ApplicationEventPublisher publisher;
 
-	public RegisterController(IUserService userService) {
+	public RegisterController(IUserService userService, ApplicationEventPublisher publisher) {
 		this.userService = userService;
+		this.publisher = publisher;
 	}
 
 	@GetMapping(PathConstants.REGISTER)
@@ -33,20 +38,18 @@ public class RegisterController {
 	public String register(@Valid NewUserBinding newUser, BindingResult bindingResult, RedirectAttributes attributes) {
 
 		// check for errors
-		if (bindingResult.hasErrors()) {
-			attributes.addFlashAttribute("newUserBinding", newUser)//
-					.addFlashAttribute("org.springframework.validation.BindingResult.newUserBinding",
-							bindingResult);
-			return PathConstants.REDIRECT_REGISTER;
-		}
-
-		if (!UserValidatorUtil.isValid(attributes, newUser, bindingResult, userService)) {
+		if (bindingResult.hasErrors() || !UserValidatorUtil.isValid(attributes, newUser, bindingResult, userService)) {
 			attributes.addFlashAttribute("newUserBinding", newUser)//
 					.addFlashAttribute("org.springframework.validation.BindingResult.newUserBinding", bindingResult);
 			return PathConstants.REDIRECT_REGISTER;
 		}
-		
-		userService.register(newUser);
+
+		// TODO: Check for exceptions
+		boolean isRegiterSuccess = userService.register(newUser);
+		if (isRegiterSuccess) {
+			ApplicationEvent event = new EmailEvent(this, newUser.getUsername(), newUser.getEmail());
+			publisher.publishEvent(event);
+		}
 
 		return PathConstants.REDIRECT_LOGIN;
 	}

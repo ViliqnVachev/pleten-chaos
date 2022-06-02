@@ -17,12 +17,12 @@ public class UserValidatorUtil {
 			valid = false;
 		}
 
-		if (!userService.isUniqueEmail(newUser.getEmail())) {
+		if (userService.isUniqueEmail(newUser.getEmail())) {
 			attributes.addFlashAttribute("isNotUniqueEmail", true);
 			valid = false;
 		}
 
-		if (!userService.isUniqueUsername(newUser.getUsername())) {
+		if (userService.isUniqueUsername(newUser.getUsername())) {
 			attributes.addFlashAttribute("isNotUnique", true);
 			valid = false;
 		}
