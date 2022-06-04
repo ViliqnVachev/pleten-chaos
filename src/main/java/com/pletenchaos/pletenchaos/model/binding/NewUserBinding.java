@@ -15,7 +15,7 @@ public class NewUserBinding {
 
 	@NotNull
 	@NotEmpty
-	private String username;
+	private String loginName;
 
 	@NotNull
 	@NotEmpty
@@ -49,12 +49,12 @@ public class NewUserBinding {
 		this.lastName = lastName;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getLoginName() {
+		return loginName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
 
 	public String getPassword() {

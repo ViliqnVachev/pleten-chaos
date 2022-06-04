@@ -22,7 +22,7 @@ public class UserValidatorUtil {
 			valid = false;
 		}
 
-		if (userService.isUniqueUsername(newUser.getUsername())) {
+		if (userService.isUniqueUsername(newUser.getLoginName())) {
 			attributes.addFlashAttribute("isNotUnique", true);
 			valid = false;
 		}

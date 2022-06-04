@@ -1,5 +1,7 @@
 package com.pletenchaos.pletenchaos.service.impl;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +34,19 @@ public class RoleServiceImpl implements IRoleService {
 		return ConvertObjUtil.convert(roleEntity, RoleBinding.class, mapper);
 	}
 
+	@Override
+	public void initRoles() {
+		if (roleRepo.count() == 0) {
+			RoleBinding adminRole = new RoleBinding();
+			adminRole.setRole(RoleEnum.ADMIN);
+
+			RoleBinding userRole = new RoleBinding();
+			userRole.setRole(RoleEnum.USER);
+
+			roleRepo.saveAll(List.of(ConvertObjUtil.convert(userRole, RoleEntity.class, mapper),
+					ConvertObjUtil.convert(adminRole, RoleEntity.class, mapper)));
+		}
+
+	}
 
 }

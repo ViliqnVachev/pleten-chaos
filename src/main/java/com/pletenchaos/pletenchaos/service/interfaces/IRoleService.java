@@ -7,4 +7,6 @@ public interface IRoleService {
 
 	RoleBinding findByRole(RoleEnum admin);
 
+	void initRoles();
+
 }

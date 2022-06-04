@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.pletenchaos.pletenchaos.model.binding.NewUserBinding;
@@ -25,11 +26,15 @@ public class UserServiceImpl implements IUserService {
 
 	private final IRoleService roleService;
 
+	private final PasswordEncoder passwordEncoder;
+
 	@Autowired
-	public UserServiceImpl(UserRepository userRepo, ModelMapper mapper, IRoleService roleService) {
+	public UserServiceImpl(UserRepository userRepo, ModelMapper mapper, IRoleService roleService,
+			PasswordEncoder passwordEncoder) {
 		this.userRepo = userRepo;
 		this.mapper = mapper;
 		this.roleService = roleService;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
@@ -58,6 +63,8 @@ public class UserServiceImpl implements IUserService {
 			RoleEntity roleEntity = ConvertObjUtil
 					.convert((userRepo.count() == 0 ? roleService.findByRole(RoleEnum.ADMIN)
 							: roleService.findByRole(RoleEnum.USER)), RoleEntity.class, mapper);
+			userEntity.setPassword(passwordEncoder.encode(newUser.getPassword()));
+			userEntity.setActive(true);
 			userEntity.setRoles(Arrays.asList(roleEntity));
 			userEntity.setStatistics(null);
 

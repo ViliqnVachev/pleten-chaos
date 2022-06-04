@@ -46,8 +46,9 @@ public class RegisterController {
 
 		// TODO: Check for exceptions
 		boolean isRegiterSuccess = userService.register(newUser);
+
 		if (isRegiterSuccess) {
-			ApplicationEvent event = new EmailEvent(this, newUser.getUsername(), newUser.getEmail());
+			ApplicationEvent event = new EmailEvent(this, newUser.getLoginName(), newUser.getEmail());
 			publisher.publishEvent(event);
 		}
 
