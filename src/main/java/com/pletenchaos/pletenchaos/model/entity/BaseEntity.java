@@ -19,7 +19,7 @@ public abstract class BaseEntity {
 		return id;
 	}
 
-	public void ListId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

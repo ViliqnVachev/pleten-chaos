@@ -7,12 +7,8 @@ import com.pletenchaos.pletenchaos.utils.common.PathConstants;
 import com.pletenchaos.pletenchaos.utils.common.ViewConstants;
 
 @Controller
-public class HomeCotnroller {
+public class HomeController {
 
-	@GetMapping(PathConstants.LOGIN)
-	public String getLoginView() {
-		return ViewConstants.LOGIN_VIEW;
-	}
 
 	@GetMapping(PathConstants.HOME)
 	public String getRegisterHome() {

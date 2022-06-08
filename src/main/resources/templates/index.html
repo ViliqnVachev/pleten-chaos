@@ -3,6 +3,11 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<title>Login</title>
+	<meta name="_csrf" th:content="${_csrf.token}" />
+	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -31,21 +36,24 @@
 					<img src="images/pleten.chaos.jpg" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form">
+				<form th:action=@{/login} th:method="post" class="login100-form validate-form">
 					<span class="login100-form-title">
 						Login
 					</span>
+					
+					<small th:if="${bad_credential}" class="error">Wrong credentials</small>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid user is required">
-						<input class="input100" type="text" name="username" placeholder="Username">
+						<input th:value="${username}" class="input100" type="text" name="username" placeholder="Username">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
 						</span>
 					</div>
-
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+					<!-- th:classappend="${bad_credentials} ? 'alert-validate' : ''" -->
+					
+					<div  class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input  class="input100" type="password" name="pass" placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
