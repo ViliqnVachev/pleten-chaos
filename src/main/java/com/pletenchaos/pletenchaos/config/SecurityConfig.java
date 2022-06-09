@@ -1,7 +1,6 @@
 package com.pletenchaos.pletenchaos.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,19 +14,22 @@ import com.pletenchaos.pletenchaos.model.entity.enums.RoleEnum;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private final UserDetailsService detailsService;
-	private final PasswordEncoder passwordEnc;
+	private final UserDetailsService userDetailsService;
+	private final PasswordEncoder passwordEncoder;
 
 	@Autowired
-	public SecurityConfig(UserDetailsService detailsService, PasswordEncoder passwordEnc) {
-		this.detailsService = detailsService;
-		this.passwordEnc = passwordEnc;
+	public SecurityConfig(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+		this.userDetailsService = userDetailsService;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http//
-				.authorizeRequests().requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // allow
+				.authorizeRequests()
+				.antMatchers("/resources/**", "/static/**", "/css/**", "/fonts/**", "/images/**", "/js/**",
+						"/vendor/**")
+				.permitAll() // allow
 																														// access
 																														// to
 																														// all
@@ -54,7 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(detailsService).passwordEncoder(passwordEnc);
+		auth.userDetailsService(userDetailsService)//
+				.passwordEncoder(passwordEncoder);
 	}
 
 }
