@@ -36,7 +36,7 @@ public class UserDetailsImpl implements UserDetailsService {
 		return convertToUser(user);
 	}
 
-	private User convertToUser(UserEntity user) {
+	private UserDetails convertToUser(UserEntity user) {
 
 		List<GrantedAuthority> auhtorities = user.getRoles().stream()
 				.map(r -> new SimpleGrantedAuthority(String.format("ROLE_%s", r.getRole().name())))
