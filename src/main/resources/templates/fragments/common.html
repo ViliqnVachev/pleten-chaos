@@ -2,5 +2,71 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head th:fragment="head">
+		<title>Pleten-chaos</title>
+		<meta name="_csrf" th:content="${_csrf.token}" />
+		<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!--===============================================================================================-->
+		<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+		<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+		<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+		<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+		<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+		<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css"	href="vendor/select2/select2.min.css">
+		<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="css/util.css">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<!--===============================================================================================-->
 	</head>
+	
+	<body>
+		<header th:fragment="navigation">
+			<div class="cd-logo"><a sec:authorize="isAuthenticated()" href="/home"><img src="images/cd-logo.svg" alt="Logo"></a></div>
+
+			<nav class="cd-main-nav-wrapper">
+				<ul class="cd-main-nav">
+					<li><a sec:authorize="isAuthenticated()" href="#0">My profile</a></li>
+					<li><a sec:authorize="isAuthenticated()" href="#0">Statistics</a></li>
+					<li sec:authorize="isAuthenticated()">
+						<form th:action="@{/logout}" th:method="post">
+							<input value="Logout" type="submit">
+						</form>
+					</li>
+					<li id="order">
+						<a sec:authorize="isAuthenticated()" href="#0" class="cd-subnav-trigger"><span>Orders</span></a>
+
+						<ul>
+							<li class="go-back"><a sec:authorize="isAuthenticated()" href="#0">Menu</a></li>
+							<li><a sec:authorize="isAuthenticated()" href="#progress">In Progress</a></li>
+							<li><a sec:authorize="isAuthenticated()" href="#all">View All</a></li>
+							<li><a sec:authorize="isAuthenticated()" href="#new">Add new</a></li>
+							<li><a sec:authorize="isAuthenticated()" href="#0" class="placeholder">Placeholder</a></li>
+						</ul>
+					</li>
+					<li id="material">
+						<a sec:authorize="isAuthenticated()" href="#0" class="cd-subnav-trigger"><span>Materials</span></a>
+
+						<ul>
+							<li class="go-back"><a sec:authorize="isAuthenticated()" href="#0">Menu</a></li>
+							<li><a sec:authorize="isAuthenticated()" href="#available">Available</a></li>
+							<li><a sec:authorize="isAuthenticated()" href="#addNew">Add new</a></li>
+							<li><a sec:authorize="isAuthenticated()" href="#0" class="placeholder">Placeholder</a></li>
+						</ul>
+					</li>
+
+				</ul> <!-- .cd-main-nav -->
+			</nav> <!-- .cd-main-nav-wrapper -->
+
+			<a href="#0" class="cd-nav-trigger">Menu<span></span></a>
+		</header>
+	</body>
 </html>
