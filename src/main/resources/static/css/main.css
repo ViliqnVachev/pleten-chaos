@@ -491,6 +491,9 @@ iframe {
   visibility: visible;
   opacity: 1;
 }
+.logout{
+	color:#ffff
+}
 
 @media (max-width: 992px) {
   .alert-validate::before {
