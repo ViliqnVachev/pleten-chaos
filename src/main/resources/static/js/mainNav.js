@@ -23,11 +23,11 @@ jQuery(document).ready(function ($) {
 	$('.go-back').on('click', function (event) {
 		event.preventDefault();
 		if ($('#material').is(":hidden")) {
-			// document.querySelector('#material').classList.remove('hidden-element');
 			$('#material').show();
+			$('#logout').show();
 		} else if ($('#order').is(":hidden")) {
-			// document.querySelector('#order').classList.remove('hidden-element');
 			$('#order').show();
+			$('#logout').show();
 		}
 		$('.cd-main-nav').removeClass('moves-out');
 	});
@@ -36,16 +36,17 @@ jQuery(document).ready(function ($) {
 	$('.cd-subnav-trigger').on('click', function (event) {
 		event.preventDefault();
 		if (event.currentTarget.text === 'Orders' && !$('#material').is(":hidden")) {
-			// document.querySelector('#material').classList.add('hidden-element');
 			$('#material').hide();
+			$('#logout').hide();
 		} else if (event.currentTarget.text === 'Materials' && !$('#order').is(":hidden")) {
 			$('#order').hide();
+			$('#logout').hide();
 		} else if (event.currentTarget.text === 'Orders' && $('#material').is(":hidden")) {
-			// document.querySelector('#material').classList.remove('hidden-element');
 			$('#material').show();
+			$('#logout').show();
 		} else if (event.currentTarget.text === 'Materials' && $('#order').is(":hidden")) {
-			// document.querySelector('#order').classList.remove('hidden-element');
 			$('#order').show();
+			$('#logout').show();
 		}
 
 
