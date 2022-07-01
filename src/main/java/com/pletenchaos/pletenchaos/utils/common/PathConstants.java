@@ -10,6 +10,10 @@ public final class PathConstants {
 
 	public static final String HOME = "/home";
 
+	public static final String MATERIAL = "/material";
+
+	public static final String ADD_MATERIAL = "/add";
+
 	public static final String LOGIN_ERROR = "/login-error";
 
 	public static final String REDIRECT_HOME = REDIRECT + HOME;
