@@ -9,12 +9,12 @@ import com.pletenchaos.pletenchaos.service.interfaces.IEmailService;
 import com.pletenchaos.pletenchaos.utils.common.EmailConstants;
 
 @Service
-public class EmailService implements IEmailService {
+public class EmailServiceImpl implements IEmailService {
 
 	private final JavaMailSender mailSender;
 
 	@Autowired
-	public EmailService(JavaMailSender mailSender) {
+	public EmailServiceImpl(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
 	}
 
