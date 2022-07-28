@@ -20,7 +20,7 @@ public final class PathConstants {
 
 	public static final String REDIRECT_REGISTER = REDIRECT + REGISTER;
 
-	public static final String REDIRECT_ADD_MATERIAL = REDIRECT + MATERIAL;
+	public static final String REDIRECT_ADD_MATERIAL = REDIRECT + MATERIAL + ADD_MATERIAL;
 
 	public static final String REDIRECT_LOGIN = REDIRECT + LOGIN;
 

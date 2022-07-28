@@ -3,39 +3,39 @@ package com.pletenchaos.pletenchaos.model.binding;
 import java.time.LocalDate;
 
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sun.istack.NotNull;
 
-public class AddMaterialBinding extends BaseModel {
+public class NewMaterialBinding extends BaseModel {
 
-	@NotNull
-	@Size(min = 1)
+	@NotBlank
 	private String materialName;
 
 	@NotNull
+	@NotBlank
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
 
-	@NotNull
+	@NotBlank
 	@DecimalMin("0.0")
 	private Double singlePrice;
 
-	@NotNull
+	@NotBlank
 	@DecimalMin("0.0")
 	private Double quantity;
 
-	@NotNull
+	@NotBlank
 	@DecimalMin("0.0")
 	private Double totalPrice;
 
-	@NotNull
+	@NotBlank
 	private MultipartFile picture;
 
-	public AddMaterialBinding() {
+	public NewMaterialBinding() {
 	}
 
 	public String getMaterialName() {

@@ -1,4 +1,4 @@
-package com.pletenchaos.pletenchaos.utils.users;
+package com.pletenchaos.pletenchaos.utils.validators.materials;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -6,8 +6,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.pletenchaos.pletenchaos.model.binding.NewUserBinding;
 import com.pletenchaos.pletenchaos.service.interfaces.IUserService;
 
-public class UserValidatorUtil {
-
+public class MaterialsValidatorUtils {
 	public static boolean isValid(RedirectAttributes attributes, NewUserBinding newUser, BindingResult bindingResult,
 			IUserService userService) {
 		boolean valid = true;
@@ -29,5 +28,4 @@ public class UserValidatorUtil {
 
 		return valid;
 	}
-
 }

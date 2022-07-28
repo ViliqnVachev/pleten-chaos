@@ -15,7 +15,7 @@ import com.pletenchaos.pletenchaos.model.binding.NewUserBinding;
 import com.pletenchaos.pletenchaos.service.interfaces.IUserService;
 import com.pletenchaos.pletenchaos.utils.common.PathConstants;
 import com.pletenchaos.pletenchaos.utils.common.ViewConstants;
-import com.pletenchaos.pletenchaos.utils.users.UserValidatorUtil;
+import com.pletenchaos.pletenchaos.utils.validators.users.UserValidatorUtil;
 import com.pletenchaos.pletenchaos.web.events.EmailEvent;
 
 @Controller
