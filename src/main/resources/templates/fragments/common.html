@@ -11,26 +11,26 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!--===============================================================================================-->
-		<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+		<link rel="icon" type="image/png" href="/images/icons/favicon.ico" />
 		<!--===============================================================================================-->
-		<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
 		<!--===============================================================================================-->
-		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 		<!--===============================================================================================-->
-		<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+		<link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
 		<!--===============================================================================================-->
-		<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+		<link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
 		<!--===============================================================================================-->
-		<link rel="stylesheet" type="text/css"	href="vendor/select2/select2.min.css">
+		<link rel="stylesheet" type="text/css"	href="/vendor/select2/select2.min.css">
 		<!--===============================================================================================-->
-		<link rel="stylesheet" type="text/css" href="css/util.css">
-		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<link rel="stylesheet" type="text/css" href="/css/util.css">
+		<link rel="stylesheet" type="text/css" href="/css/main.css">
 		<!--===============================================================================================-->
 	</head>
 	
 	<body>
 		<header th:fragment="navigation">
-			<div class="cd-logo"><a sec:authorize="isAuthenticated()" href="/home"><img src="images/cd-logo.svg" alt="Logo"></a></div>
+			<div class="cd-logo"><a sec:authorize="isAuthenticated()" href="/home"><img src="/images/cd-logo.svg" alt="Logo"></a></div>
 
 			<nav class="cd-main-nav-wrapper">
 				<ul class="cd-main-nav">
@@ -58,7 +58,7 @@
 						<ul>
 							<li class="go-back"><a sec:authorize="isAuthenticated()" href="#0">Menu</a></li>
 							<li><a sec:authorize="isAuthenticated()" href="#available">Available</a></li>
-							<li><a sec:authorize="isAuthenticated()" href="#addNew">Add new</a></li>
+							<li><a sec:authorize="isAuthenticated()" href="/material/add">Add new</a></li>
 							<li><a sec:authorize="isAuthenticated()" href="#0" class="placeholder">Placeholder</a></li>
 						</ul>
 					</li>

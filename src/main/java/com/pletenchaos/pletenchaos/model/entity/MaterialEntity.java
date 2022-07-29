@@ -12,6 +12,9 @@ import javax.persistence.Table;
 @Table(name = "materials")
 public class MaterialEntity extends BaseEntity {
 
+	@Column(nullable = false, unique = true)
+	private String name;
+
 	@Column(nullable = false)
 	private Double qantity;
 
@@ -66,8 +69,16 @@ public class MaterialEntity extends BaseEntity {
 		return picture;
 	}
 
-	public void ListPicture(PictureEntity picture) {
+	public void setPicture(PictureEntity picture) {
 		this.picture = picture;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

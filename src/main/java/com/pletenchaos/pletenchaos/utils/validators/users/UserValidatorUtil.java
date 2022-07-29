@@ -1,4 +1,4 @@
-package com.pletenchaos.pletenchaos.utils.users;
+package com.pletenchaos.pletenchaos.utils.validators.users;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;

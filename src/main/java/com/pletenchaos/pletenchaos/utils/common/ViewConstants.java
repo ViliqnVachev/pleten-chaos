@@ -8,4 +8,6 @@ public final class ViewConstants {
 
 	public static final String HOME_VIEW = "index";
 
+	public static final String ADD_MATERIAL_VIEW = "addMaterial";
+
 }
