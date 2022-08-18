@@ -18,9 +18,11 @@ public class NewMaterialBinding extends BaseModel {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
 
+	@NotNull
 	@DecimalMin("0.0")
 	private Double singlePrice;
 
+	@NotNull
 	@DecimalMin("0.0")
 	private Double quantity;
 
