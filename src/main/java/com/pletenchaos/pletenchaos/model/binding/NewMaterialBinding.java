@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
-public class NewMaterialBinding extends BaseModel {
+public class NewMaterialBinding extends BaseBindingModel {
 
 	@NotBlank
 	private String materialName;

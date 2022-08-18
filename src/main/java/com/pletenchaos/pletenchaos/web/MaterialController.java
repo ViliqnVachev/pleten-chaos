@@ -16,6 +16,7 @@ import com.pletenchaos.pletenchaos.model.binding.NewMaterialBinding;
 import com.pletenchaos.pletenchaos.service.interfaces.IMaterialService;
 import com.pletenchaos.pletenchaos.utils.common.PathConstants;
 import com.pletenchaos.pletenchaos.utils.common.ViewConstants;
+import com.pletenchaos.pletenchaos.utils.validators.users.MaterialValidatorUtil;
 
 @Controller
 @RequestMapping(PathConstants.MATERIAL)
@@ -38,7 +39,8 @@ public class MaterialController {
 			RedirectAttributes attributes) {
 
 		// check for errors
-		if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()
+				|| !MaterialValidatorUtil.isValid(attributes, newMaterialBinding, bindingResult, materialService)) {
 			attributes.addFlashAttribute("newMaterialBinding", newMaterialBinding)//
 					.addFlashAttribute("org.springframework.validation.BindingResult.newMaterialBinding",
 							bindingResult);

@@ -1,10 +1,10 @@
 package com.pletenchaos.pletenchaos.model.binding;
 
-public abstract class BaseModel {
+public abstract class BaseBindingModel {
 
 	private Long id;
 
-	public BaseModel() {
+	public BaseBindingModel() {
 	}
 
 	public Long getId() {
