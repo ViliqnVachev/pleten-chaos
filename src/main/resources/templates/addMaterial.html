@@ -28,14 +28,14 @@
 		<div class="container-login100">
 			<div class="center-register">
 
-				<form th:method="post" th:action="@{/material/add}" th:object="${newMaterialBinding}" class="login100-form validate-form">
+				<form th:method="post" th:action="@{/material/add}" th:object="${newMaterialBinding}" class="login100-form validate-form" enctype="multipart/form-data">
 					<span class="login100-form-title">
 						Add Material
 					</span>
 
 					<small th:if="${isNotUnique}" class="error">The material already exits</small>
-					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('materialName')} ? 'alert-validate' : ''" data-validate = "Material Name is required">
-						<input th:field="*{materialName}" class="input100" type="text" name="mname" placeholder="Material Name">
+					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('name')} ? 'alert-validate' : ''" data-validate = "Material Name is required">
+						<input th:field="*{name}" class="input100" type="text" name="mname" placeholder="Material Name">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-info" aria-hidden="true"></i>
@@ -52,8 +52,8 @@
 					</div>
 
 
-					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('singlePrice')} ? 'alert-validate' : ''" data-validate = "Single Price is required">
-						<input id="singlePrice" th:field="*{singlePrice}" class="input100" type="number" min="0" step=".01" name="price" placeholder="Single Price">
+					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('price')} ? 'alert-validate' : ''" data-validate = "Single Price is required">
+						<input id="singlePrice" th:field="*{price}" class="input100" type="number" min="0" step=".01" name="price" placeholder="Single Price">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-dollar" aria-hidden="true"></i>
@@ -77,7 +77,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('picture')} ? 'alert-validate' : ''" data-validate = "Picture is required">
-						<input th:field="*{picture}"  id="img" class="input100" type="file" name="picture" title="">
+						<input th:field="*{picture}" id="img" class="input100" type="file" name="picture">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-image" aria-hidden="true"></i>

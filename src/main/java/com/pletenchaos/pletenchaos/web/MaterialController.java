@@ -3,6 +3,8 @@ package com.pletenchaos.pletenchaos.web;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,7 +38,7 @@ public class MaterialController {
 
 	@PostMapping(PathConstants.ADD_MATERIAL)
 	public String addMaterial(@Valid NewMaterialBinding newMaterialBinding, BindingResult bindingResult,
-			RedirectAttributes attributes) {
+			RedirectAttributes attributes, @AuthenticationPrincipal User user) {
 
 		// check for errors
 		if (bindingResult.hasErrors()
@@ -46,7 +48,11 @@ public class MaterialController {
 							bindingResult);
 			return PathConstants.REDIRECT_ADD_MATERIAL;
 		}
-		return null;
+
+		// TODO: check for errors
+		materialService.addMaterial(newMaterialBinding, user.getUsername());
+
+		return PathConstants.REDIRECT_HOME;
 	}
 
 	@ModelAttribute

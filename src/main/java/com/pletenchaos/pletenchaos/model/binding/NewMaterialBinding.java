@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class NewMaterialBinding extends BaseBindingModel {
 
 	@NotBlank
-	private String materialName;
+	private String name;
 
 	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -20,7 +20,7 @@ public class NewMaterialBinding extends BaseBindingModel {
 
 	@NotNull
 	@DecimalMin("0.0")
-	private Double singlePrice;
+	private Double price;
 
 	@NotNull
 	@DecimalMin("0.0")
@@ -35,12 +35,12 @@ public class NewMaterialBinding extends BaseBindingModel {
 	public NewMaterialBinding() {
 	}
 
-	public String getMaterialName() {
-		return materialName;
+	public String getName() {
+		return name;
 	}
 
-	public void setMaterialName(String materialName) {
-		this.materialName = materialName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public LocalDate getDate() {
@@ -51,12 +51,12 @@ public class NewMaterialBinding extends BaseBindingModel {
 		this.date = date;
 	}
 
-	public Double getSinglePrice() {
-		return singlePrice;
+	public Double getPrice() {
+		return price;
 	}
 
-	public void setSinglePrice(Double singlePrice) {
-		this.singlePrice = singlePrice;
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
 	public Double getQuantity() {

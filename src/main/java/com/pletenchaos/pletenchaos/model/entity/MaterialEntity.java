@@ -1,11 +1,14 @@
 package com.pletenchaos.pletenchaos.model.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,7 +19,7 @@ public class MaterialEntity extends BaseEntity {
 	private String name;
 
 	@Column(nullable = false)
-	private Double qantity;
+	private Double quantity;
 
 	@Column(nullable = false)
 	private Double price;
@@ -27,25 +30,28 @@ public class MaterialEntity extends BaseEntity {
 	@Column(nullable = false)
 	private LocalDate date;
 
-	@OneToOne(mappedBy = "author", fetch = FetchType.LAZY)
-	private PictureEntity picture;
+	@OneToMany(mappedBy = "material", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<PictureEntity> pictures;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private UserEntity author;
 
 	public MaterialEntity() {
 	}
 
-	public Double getQantity() {
-		return qantity;
+	public Double getQuantity() {
+		return quantity;
 	}
 
-	public void ListQantity(Double qantity) {
-		this.qantity = qantity;
+	public void setQuantity(Double quantity) {
+		this.quantity = quantity;
 	}
 
 	public Double getPrice() {
 		return price;
 	}
 
-	public void ListPrice(Double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
@@ -53,7 +59,7 @@ public class MaterialEntity extends BaseEntity {
 		return totalPrice;
 	}
 
-	public void ListTotalPrice(Double totalPrice) {
+	public void setTotalPrice(Double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
@@ -61,16 +67,16 @@ public class MaterialEntity extends BaseEntity {
 		return date;
 	}
 
-	public void ListDate(LocalDate date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
-	public PictureEntity getPicture() {
-		return picture;
+	public List<PictureEntity> getPictures() {
+		return pictures;
 	}
 
-	public void setPicture(PictureEntity picture) {
-		this.picture = picture;
+	public void setPictures(List<PictureEntity> pictures) {
+		this.pictures = pictures;
 	}
 
 	public String getName() {
@@ -79,6 +85,14 @@ public class MaterialEntity extends BaseEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public UserEntity getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(UserEntity author) {
+		this.author = author;
 	}
 
 }

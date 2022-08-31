@@ -6,6 +6,6 @@ public interface IMaterialService {
 
 	boolean isUnique(String name);
 
-	boolean addMaterial(NewMaterialBinding binding);
+	boolean addMaterial(NewMaterialBinding binding, String userName);
 
 }

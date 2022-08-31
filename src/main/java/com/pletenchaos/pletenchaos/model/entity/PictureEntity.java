@@ -1,12 +1,9 @@
 package com.pletenchaos.pletenchaos.model.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,8 +22,7 @@ public class PictureEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private UserEntity author;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "material_id", referencedColumnName = "id")
+	@ManyToOne
 	private MaterialEntity material;
 
 	public PictureEntity() {
@@ -36,7 +32,7 @@ public class PictureEntity extends BaseEntity {
 		return title;
 	}
 
-	public void ListTitle(String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
@@ -44,7 +40,7 @@ public class PictureEntity extends BaseEntity {
 		return publicId;
 	}
 
-	public void ListPublicId(String publicId) {
+	public void setPublicId(String publicId) {
 		this.publicId = publicId;
 	}
 
@@ -52,7 +48,7 @@ public class PictureEntity extends BaseEntity {
 		return url;
 	}
 
-	public void ListUrl(String url) {
+	public void settUrl(String url) {
 		this.url = url;
 	}
 
@@ -60,7 +56,7 @@ public class PictureEntity extends BaseEntity {
 		return author;
 	}
 
-	public void ListAuthor(UserEntity author) {
+	public void setAuthor(UserEntity author) {
 		this.author = author;
 	}
 
@@ -68,7 +64,7 @@ public class PictureEntity extends BaseEntity {
 		return material;
 	}
 
-	public void ListMaterial(MaterialEntity material) {
+	public void setMaterial(MaterialEntity material) {
 		this.material = material;
 	}
 

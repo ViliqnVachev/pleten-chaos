@@ -11,7 +11,7 @@ public class MaterialValidatorUtil {
 			BindingResult bindingResult, IMaterialService materialService) {
 		boolean valid = true;
 
-		if (materialService.isUnique(newMaterialBinding.getMaterialName())) {
+		if (materialService.isUnique(newMaterialBinding.getName())) {
 			attributes.addFlashAttribute("isNotUnique", true);
 			valid = false;
 		}
