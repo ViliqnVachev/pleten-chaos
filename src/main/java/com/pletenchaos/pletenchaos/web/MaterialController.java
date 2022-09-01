@@ -1,5 +1,7 @@
 package com.pletenchaos.pletenchaos.web;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.pletenchaos.pletenchaos.model.binding.NewMaterialBinding;
+import com.pletenchaos.pletenchaos.model.binding.MaterialBinding;
 import com.pletenchaos.pletenchaos.service.interfaces.IMaterialService;
 import com.pletenchaos.pletenchaos.utils.common.PathConstants;
 import com.pletenchaos.pletenchaos.utils.common.ViewConstants;
@@ -32,32 +34,39 @@ public class MaterialController {
 	}
 
 	@GetMapping(PathConstants.ADD_MATERIAL)
-	public String getMaterialView(Model model) {
+	public String getMaterialView() {
 		return ViewConstants.ADD_MATERIAL_VIEW;
 	}
 
+	@GetMapping(PathConstants.AVAILABLE_MATERIAL)
+	public String getAvailableMaterialView(Model model, @AuthenticationPrincipal User user) {
+		List<MaterialBinding> materials = materialService.getMaterialsByUser(user.getUsername());
+		model.addAttribute("materials", materials);
+		return ViewConstants.AVAILABLE_MATERIAL_VIEW;
+	}
+
 	@PostMapping(PathConstants.ADD_MATERIAL)
-	public String addMaterial(@Valid NewMaterialBinding newMaterialBinding, BindingResult bindingResult,
+	public String addMaterial(@Valid MaterialBinding materialBinding, BindingResult bindingResult,
 			RedirectAttributes attributes, @AuthenticationPrincipal User user) {
 
 		// check for errors
 		if (bindingResult.hasErrors()
-				|| !MaterialValidatorUtil.isValid(attributes, newMaterialBinding, bindingResult, materialService)) {
-			attributes.addFlashAttribute("newMaterialBinding", newMaterialBinding)//
+				|| !MaterialValidatorUtil.isValid(attributes, materialBinding, bindingResult, materialService)) {
+			attributes.addFlashAttribute("materialBinding", materialBinding)//
 					.addFlashAttribute("org.springframework.validation.BindingResult.newMaterialBinding",
 							bindingResult);
 			return PathConstants.REDIRECT_ADD_MATERIAL;
 		}
 
 		// TODO: check for errors
-		materialService.addMaterial(newMaterialBinding, user.getUsername());
+		materialService.addMaterial(materialBinding, user.getUsername());
 
-		return PathConstants.REDIRECT_HOME;
+		return PathConstants.REDIRECT_AVAILABLE_MATERIAL;
 	}
 
 	@ModelAttribute
-	public NewMaterialBinding newMaterialBinding() {
-		return new NewMaterialBinding();
+	public MaterialBinding materialBinding() {
+		return new MaterialBinding();
 	}
 
 }

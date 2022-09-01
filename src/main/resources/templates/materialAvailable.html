@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/common::head"></head>
+<head>
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="/css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="/css/style.css"> <!-- Resource style -->
+	<script src="/js/modernizr.js"></script> <!-- Modernizr -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+	<script src="js/modernizr.js"></script> <!-- Modernizr -->
+
+	<title>Secondary Sliding Navigation | CodyHouse</title>
+</head>
+
+<body>
+	<header th:replace="fragments/common::navigation"> </header>
+	<main class="cd-main-content">
+	<div class="limiter">
+		<div class="container-login100">
+			<div th:each="m : ${materials}" th:object="${m}" class="cardPosition">
+				<div class="card">
+
+					<div class="imgBox">
+						<img th:src="*{pictureUrl}" alt="mouse corsair" class="mouse">
+					</div>
+
+					<div class="contentBox">
+						<h3 th:text="*{name}">Mouse Corsair M65</h3>
+						<h2 th:text="|*{quantity} left|" class="price">61.<small>98</small> left</h2>
+						<a href="#" class="buy">View</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	</main>
+
+
+
+	<!--===============================================================================================-->
+	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="/vendor/bootstrap/js/popper.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="/vendor/select2/select2.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="/vendor/tilt/tilt.jquery.min.js"></script>
+	<script>
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+	<!--===============================================================================================-->
+	<script src="/js/jquery-2.1.1.js"></script>
+	<script src="/js/mainNav.js"></script> <!-- Resource jQuery -->
+	<script th:src="@{/js/calclulate.js}"></script>
+</body>
+
+</html>

@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
-public class NewMaterialBinding extends BaseBindingModel {
+public class MaterialBinding extends BaseBindingModel {
 
 	@NotBlank
 	private String name;
@@ -32,7 +32,9 @@ public class NewMaterialBinding extends BaseBindingModel {
 	@NotNull
 	private MultipartFile picture;
 
-	public NewMaterialBinding() {
+	private String pictureUrl;
+
+	public MaterialBinding() {
 	}
 
 	public String getName() {
@@ -83,4 +85,11 @@ public class NewMaterialBinding extends BaseBindingModel {
 		this.picture = picture;
 	}
 
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
 }
