@@ -3,12 +3,16 @@ package com.pletenchaos.pletenchaos.service.impl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pletenchaos.pletenchaos.model.binding.NewMaterialBinding;
+import com.pletenchaos.pletenchaos.model.binding.MaterialBinding;
 import com.pletenchaos.pletenchaos.model.entity.MaterialEntity;
 import com.pletenchaos.pletenchaos.model.entity.PictureEntity;
 import com.pletenchaos.pletenchaos.model.entity.UserEntity;
@@ -50,7 +54,7 @@ public class MaterialServiceImpl implements IMaterialService {
 	}
 
 	@Override
-	public boolean addMaterial(NewMaterialBinding binding, String loginName) {
+	public boolean addMaterial(MaterialBinding binding, String loginName) {
 
 		UserEntity user = userRepo.findByloginName(loginName)
 				.orElseThrow(() -> new NotFoundEntity(String.format("User with name %s not found!", loginName)));
@@ -58,7 +62,6 @@ public class MaterialServiceImpl implements IMaterialService {
 		MaterialEntity material = ConvertObjUtil.convert(binding, MaterialEntity.class, mapper);
 		material.setAuthor(user);
 		material.setTotalPrice(calculateTotalPrice(material));
-//		material.setPicture(null);
 		materialRepo.save(material);
 
 		Long pictureId;
@@ -79,9 +82,44 @@ public class MaterialServiceImpl implements IMaterialService {
 		return true;
 	}
 
+	@Transactional
+	@Override
+	public List<MaterialBinding> getMaterialsByUser(String loginName) {
+		UserEntity user = userRepo.findByloginName(loginName)
+				.orElseThrow(() -> new NotFoundEntity(String.format("User with name %s not found!", loginName)));
+
+		return user.getMaterials().stream().map(m -> {
+			MaterialBinding binding = ConvertObjUtil.convert(m, MaterialBinding.class, mapper);
+			binding.setPictureUrl(m.getPictures().iterator().next().getUrl());
+			return binding;
+
+		}).collect(Collectors.toList());
+	}
+
+	@Override
+	public boolean isOwner(String username, Long id) {
+		Optional<MaterialEntity> material = materialRepo.findById(id);
+
+		if (material.isEmpty()) {
+			return false;
+		}
+		MaterialEntity materialEntity = material.get();
+
+		return materialEntity.getAuthor().getLoginName().equals(username);
+	}
+
+	@Transactional
+	@Override
+	public MaterialBinding getMaterialById(Long id) {
+		MaterialEntity material = materialRepo.findById(id)
+				.orElseThrow(() -> new NotFoundEntity(String.format("Material with id %s is not found!", id)));
+		MaterialBinding binding = ConvertObjUtil.convert(material, MaterialBinding.class, mapper);
+		binding.setPictureUrl(material.getPictures().iterator().next().getUrl());
+		return binding;
+	}
+
 	private Double calculateTotalPrice(MaterialEntity material) {
 
 		return material.getPrice() * material.getQuantity();
 	}
-
 }

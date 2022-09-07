@@ -41,6 +41,9 @@ public class UserEntity extends BaseEntity {
 	@OneToMany(mappedBy = "creator", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<StatisticEntity> statistics;
 
+	@OneToMany(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<MaterialEntity> materials;
+
 	public UserEntity() {
 	}
 
@@ -116,4 +119,11 @@ public class UserEntity extends BaseEntity {
 		this.statistics = statistics;
 	}
 
+	public List<MaterialEntity> getMaterials() {
+		return materials;
+	}
+
+	public void setMaterials(List<MaterialEntity> materials) {
+		this.materials = materials;
+	}
 }
