@@ -3,6 +3,7 @@ package com.pletenchaos.pletenchaos.service.impl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -92,8 +93,29 @@ public class MaterialServiceImpl implements IMaterialService {
 			binding.setPictureUrl(m.getPictures().iterator().next().getUrl());
 			return binding;
 
-		})
-				.collect(Collectors.toList());
+		}).collect(Collectors.toList());
+	}
+
+	@Override
+	public boolean isOwner(String username, Long id) {
+		Optional<MaterialEntity> material = materialRepo.findById(id);
+
+		if (material.isEmpty()) {
+			return false;
+		}
+		MaterialEntity materialEntity = material.get();
+
+		return materialEntity.getAuthor().getLoginName().equals(username);
+	}
+
+	@Transactional
+	@Override
+	public MaterialBinding getMaterialById(Long id) {
+		MaterialEntity material = materialRepo.findById(id)
+				.orElseThrow(() -> new NotFoundEntity(String.format("Material with id %s is not found!", id)));
+		MaterialBinding binding = ConvertObjUtil.convert(material, MaterialBinding.class, mapper);
+		binding.setPictureUrl(material.getPictures().iterator().next().getUrl());
+		return binding;
 	}
 
 	private Double calculateTotalPrice(MaterialEntity material) {

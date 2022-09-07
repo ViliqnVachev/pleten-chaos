@@ -12,4 +12,8 @@ public interface IMaterialService {
 
 	List<MaterialBinding> getMaterialsByUser(String loginName);
 
+	boolean isOwner(String username, Long id);
+
+	MaterialBinding getMaterialById(Long id);
+
 }

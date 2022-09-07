@@ -36,7 +36,7 @@
 					<div class="contentBox">
 						<h3 th:text="*{name}">Mouse Corsair M65</h3>
 						<h2 th:text="|*{quantity} left|" class="price">61.<small>98</small> left</h2>
-						<a href="#" class="buy">View</a>
+						<a th:href="@{/material/{id}(id=*{id})}" class="buy">View</a>
 					</div>
 
 				</div>
