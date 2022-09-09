@@ -10,4 +10,6 @@ public final class ViewConstants {
 
 	public static final String ADD_MATERIAL_VIEW = "addMaterial";
 
+	public static final String AVAILABLE_MATERIAL_VIEW = "materialAvailable";
+
 }

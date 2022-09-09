@@ -2,7 +2,9 @@ package com.pletenchaos.pletenchaos.utils.common;
 
 public final class PathConstants {
 
-	private static final String REDIRECT = "redirect:";
+	public static final String REDIRECT = "redirect:";
+
+	public static final String ID = "/{id}";
 
 	public static final String LOGIN = "/login";
 
@@ -14,6 +16,8 @@ public final class PathConstants {
 
 	public static final String ADD_MATERIAL = "/add";
 
+	public static final String AVAILABLE_MATERIAL = "/available";
+
 	public static final String LOGIN_ERROR = "/login-error";
 
 	public static final String REDIRECT_HOME = REDIRECT + HOME;
@@ -22,6 +26,9 @@ public final class PathConstants {
 
 	public static final String REDIRECT_ADD_MATERIAL = REDIRECT + MATERIAL + ADD_MATERIAL;
 
+	public static final String REDIRECT_AVAILABLE_MATERIAL = REDIRECT + MATERIAL + AVAILABLE_MATERIAL;
+
 	public static final String REDIRECT_LOGIN = REDIRECT + LOGIN;
+
 
 }
