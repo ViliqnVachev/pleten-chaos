@@ -21,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.pletenchaos.pletenchaos.model.binding.MaterialBinding;
 import com.pletenchaos.pletenchaos.service.interfaces.IMaterialService;
 import com.pletenchaos.pletenchaos.utils.common.PathConstants;
-import com.pletenchaos.pletenchaos.utils.common.ViewConstants;
+import com.pletenchaos.pletenchaos.utils.common.Views;
 import com.pletenchaos.pletenchaos.utils.validators.users.MaterialValidatorUtil;
 
 @Controller
@@ -37,14 +37,14 @@ public class MaterialController {
 
 	@GetMapping(PathConstants.ADD_MATERIAL)
 	public String getMaterialView() {
-		return ViewConstants.ADD_MATERIAL_VIEW;
+		return Views.ADD_MATERIAL_VIEW;
 	}
 
 	@GetMapping(PathConstants.AVAILABLE_MATERIAL)
 	public String getAvailableMaterialView(Model model, @AuthenticationPrincipal User user) {
 		List<MaterialBinding> materials = materialService.getMaterialsByUser(user.getUsername());
 		model.addAttribute("materials", materials);
-		return ViewConstants.AVAILABLE_MATERIAL_VIEW;
+		return Views.AVAILABLE_MATERIAL_VIEW;
 	}
 
 	@PreAuthorize("@materialServiceImpl.isOwner(#principal.name, #id)")
@@ -52,7 +52,7 @@ public class MaterialController {
 	public String getMaterial(@PathVariable Long id, Model model) {
 		MaterialBinding material = materialService.getMaterialById(id);
 		model.addAttribute("material", material);
-		return null;
+		return Views.MATERILA_DETAIL;
 	}
 
 	@PostMapping(PathConstants.ADD_MATERIAL)

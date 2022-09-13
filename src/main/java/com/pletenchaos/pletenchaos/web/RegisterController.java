@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.pletenchaos.pletenchaos.model.binding.NewUserBinding;
 import com.pletenchaos.pletenchaos.service.interfaces.IUserService;
 import com.pletenchaos.pletenchaos.utils.common.PathConstants;
-import com.pletenchaos.pletenchaos.utils.common.ViewConstants;
+import com.pletenchaos.pletenchaos.utils.common.Views;
 import com.pletenchaos.pletenchaos.utils.validators.users.UserValidatorUtil;
 import com.pletenchaos.pletenchaos.web.events.EmailEvent;
 
@@ -31,7 +31,7 @@ public class RegisterController {
 
 	@GetMapping(PathConstants.REGISTER)
 	public String getRegisterView() {
-		return ViewConstants.REGISTER_VIEW;
+		return Views.REGISTER_VIEW;
 	}
 
 	@PostMapping(PathConstants.REGISTER)
