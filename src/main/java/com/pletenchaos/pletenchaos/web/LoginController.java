@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pletenchaos.pletenchaos.utils.common.PathConstants;
-import com.pletenchaos.pletenchaos.utils.common.ViewConstants;
+import com.pletenchaos.pletenchaos.utils.common.Views;
 
 @Controller
 public class LoginController {
 
 	@GetMapping(PathConstants.LOGIN)
 	public String getLoginView() {
-		return ViewConstants.LOGIN_VIEW;
+		return Views.LOGIN_VIEW;
 	}
 
 	@PostMapping(PathConstants.LOGIN_ERROR)

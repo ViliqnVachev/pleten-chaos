@@ -8,6 +8,6 @@ public interface IPictureService {
 
 	Long uploadPicture(MultipartFile multipartFile, String loginName, String materialName) throws IOException;
 
-	void deletePicture(String publicId);
+	void deletePicture(Long pictureId);
 
 }

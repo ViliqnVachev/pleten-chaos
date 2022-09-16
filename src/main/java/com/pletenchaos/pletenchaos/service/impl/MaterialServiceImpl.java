@@ -111,15 +111,29 @@ public class MaterialServiceImpl implements IMaterialService {
 	@Transactional
 	@Override
 	public MaterialBinding getMaterialById(Long id) {
-		MaterialEntity material = materialRepo.findById(id)
-				.orElseThrow(() -> new NotFoundEntity(String.format("Material with id %s is not found!", id)));
+		MaterialEntity material = findById(id);
 		MaterialBinding binding = ConvertObjUtil.convert(material, MaterialBinding.class, mapper);
 		binding.setPictureUrl(material.getPictures().iterator().next().getUrl());
 		return binding;
+	}
+
+	@Transactional
+	@Override
+	public void deleteMaterial(Long id) {
+		MaterialEntity material = findById(id);
+		List<PictureEntity> pictures = material.getPictures();
+		pictureService.deletePicture(pictures.iterator().next().getId());
+		materialRepo.deleteById(id);
 	}
 
 	private Double calculateTotalPrice(MaterialEntity material) {
 
 		return material.getPrice() * material.getQuantity();
 	}
+
+	private MaterialEntity findById(Long id) {
+		return materialRepo.findById(id)
+				.orElseThrow(() -> new NotFoundEntity(String.format("Material with id %s is not found!", id)));
+	}
+
 }

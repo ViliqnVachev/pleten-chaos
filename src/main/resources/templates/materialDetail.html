@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/common::head"></head>
+<head>
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="/css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="/css/style.css"> <!-- Resource style -->
+	<script src="/js/modernizr.js"></script> <!-- Modernizr -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+	<script src="js/modernizr.js"></script> <!-- Modernizr -->
+
+	<title>Secondary Sliding Navigation | CodyHouse</title>
+</head>
+<body>
+	<header th:replace="fragments/common::navigation"> </header>
+	<div class="limiter">
+		<div class="container-login100">
+			<div th:object="${material}" class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img th:src="*{pictureUrl}" alt="IMG">
+				</div>
+
+				<form id="detailForm" th:action=@{/login} th:method="put" class="login100-form">
+					<span th:text="*{name}" class="login100-form-title">
+						Material Name
+					</span>
+
+					<small th:if="${isNotUnique}" class="error">The material already exits</small>
+					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('name')} ? 'alert-validate' : ''" data-validate = "Material Name is required">
+						<input th:field="*{name}" class="input100" readonly type="text" name="mname" placeholder="Material Name">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-info" aria-hidden="true"></i>
+						</span>
+					</div>
+
+
+					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('date')} ? 'alert-validate' : ''" data-validate = "Valid date is required">
+						<input th:field="*{date}" class="input100" readonly type="date" name="date" placeholder="Date">
+						<span class="focus-input100"></span>						
+						<span class="symbol-input100">
+							<i class="fa fa-calendar" aria-hidden="true"></i>
+						</span>
+					</div>
+
+
+					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('price')} ? 'alert-validate' : ''" data-validate = "Single Price is required">
+						<input id="singlePrice" th:field="*{price}" readonly class="input100" type="number" min="0" step=".01" name="price" placeholder="Single Price">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-dollar" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('quantity')} ? 'alert-validate' : ''"  data-validate = "Quantity is required">
+						<input id="quantity" th:field="*{quantity}" readonly class="input100" type="number" min="1" name="quantity" placeholder="Quantity">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-plus" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100" >
+						<input th:field="*{totalPrice}" class="input100" type="number" step=".01" readonly name="total" placeholder="Total price">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-dollar" aria-hidden="true"></i>
+						</span>
+					</div>
+					
+					<div class="details">
+						<button class="edit-form-btn">
+							Edit
+						</button>
+						<button class="save-form-btn">
+							Save
+						</button>
+						<button th:attr="data-material=${material.getId()}" class="delete-form-btn">
+							Delete
+						</button>
+					</div>
+				</form>
+<!-- 				<form action="" class="login100-form"> -->
+<!-- 					<div class="details"> -->
+<!-- 						<button class="delete-form-btn"> -->
+<!-- 							Delete -->
+<!-- 						</button> -->
+<!-- 					</div>				 -->
+<!-- 				</form> -->
+			</div>
+		</div>
+	</div>
+
+	
+<!--===============================================================================================-->	
+	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/bootstrap/js/popper.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/tilt/tilt.jquery.min.js"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	<script src="/js/mainNav.js"></script> 
+	<script th:src="@{/js/calclulate.js}"></script>
+	<script th:src="@{/js/edit.js}"></script>
+
+</body>
+
+</html>
