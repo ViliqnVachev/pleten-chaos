@@ -1,21 +1,23 @@
 package com.pletenchaos.pletenchaos.utils.validators.users;
 
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pletenchaos.pletenchaos.model.binding.MaterialBinding;
 import com.pletenchaos.pletenchaos.service.interfaces.IMaterialService;
 
 public class MaterialValidatorUtil {
-	public static boolean isValid(RedirectAttributes attributes, MaterialBinding newMaterialBinding,
-			BindingResult bindingResult, IMaterialService materialService) {
-		boolean valid = true;
-
-		if (materialService.isUnique(newMaterialBinding.getName())) {
-			attributes.addFlashAttribute("isNotUnique", true);
-			valid = false;
+	public static void validateView(Model model, IMaterialService materialService, String binding, Long id) {
+		BindingResult bindingResult = (BindingResult) model
+				.getAttribute("org.springframework.validation.BindingResult.materialBinding");
+		if (bindingResult == null) {
+			MaterialBinding material = materialService.getMaterialById(id);
+			model.addAttribute(binding, material);
+			model.addAttribute("canDelete", true);
+			return;
 		}
-
-		return valid;
+		model.addAttribute(binding, bindingResult.getTarget());
+		model.addAttribute("org.springframework.validation.BindingResult.materialBinding", bindingResult);
+		model.addAttribute("canDelete", false);
 	}
 }

@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name = "materials")
 public class MaterialEntity extends BaseEntity {
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String name;
 
 	@Column(nullable = false)

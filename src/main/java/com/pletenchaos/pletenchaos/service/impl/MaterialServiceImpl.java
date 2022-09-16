@@ -7,12 +7,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pletenchaos.pletenchaos.model.binding.MaterialBinding;
+import com.pletenchaos.pletenchaos.model.binding.UpdateMaterialBinding;
 import com.pletenchaos.pletenchaos.model.entity.MaterialEntity;
 import com.pletenchaos.pletenchaos.model.entity.PictureEntity;
 import com.pletenchaos.pletenchaos.model.entity.UserEntity;
@@ -45,12 +47,6 @@ public class MaterialServiceImpl implements IMaterialService {
 		this.mapper = mapper;
 		this.pictureService = pictureService;
 		this.pictureRepo = pictureRepo;
-	}
-
-	@Override
-	public boolean isUnique(String name) {
-		MaterialEntity material = materialRepo.findByName(name).orElse(null);
-		return material != null;
 	}
 
 	@Override
@@ -126,6 +122,19 @@ public class MaterialServiceImpl implements IMaterialService {
 		materialRepo.deleteById(id);
 	}
 
+	@Override
+	public void updateMaterial(Long id, @Valid UpdateMaterialBinding updatedMaterial) {
+		MaterialEntity material = findById(id);
+		material.setName(updatedMaterial.getName());
+		material.setPrice(updatedMaterial.getPrice());
+		material.setQuantity(updatedMaterial.getQuantity());
+		material.setTotalPrice(calculateTotalPrice(material));
+		material.setDate(updatedMaterial.getDate());
+
+		materialRepo.save(material);
+	}
+
+
 	private Double calculateTotalPrice(MaterialEntity material) {
 
 		return material.getPrice() * material.getQuantity();
@@ -135,5 +144,4 @@ public class MaterialServiceImpl implements IMaterialService {
 		return materialRepo.findById(id)
 				.orElseThrow(() -> new NotFoundEntity(String.format("Material with id %s is not found!", id)));
 	}
-
 }

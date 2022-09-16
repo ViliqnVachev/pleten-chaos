@@ -18,6 +18,8 @@ public final class PathConstants {
 
 	public static final String DELETE_MATERIAL = "/delete" + ID;
 
+	public static final String UPDATE_MATERIAL = "/update" + ID;
+
 	public static final String AVAILABLE_MATERIAL = "/available";
 
 	public static final String LOGIN_ERROR = "/login-error";
@@ -26,9 +28,13 @@ public final class PathConstants {
 
 	public static final String REDIRECT_REGISTER = REDIRECT + REGISTER;
 
-	public static final String REDIRECT_ADD_MATERIAL = REDIRECT + MATERIAL + ADD_MATERIAL;
+	public static final String REDIRECT_MATERIAL = REDIRECT + MATERIAL;
 
-	public static final String REDIRECT_AVAILABLE_MATERIAL = REDIRECT + MATERIAL + AVAILABLE_MATERIAL;
+	public static final String REDIRECT_ADD_MATERIAL = REDIRECT_MATERIAL + ADD_MATERIAL;
+
+	public static final String REDIRECT_AVAILABLE_MATERIAL = REDIRECT_MATERIAL + AVAILABLE_MATERIAL;
+
+	public static final String REDIRECT_MATERIAL_DETAIL = REDIRECT_MATERIAL + ID;
 
 	public static final String REDIRECT_LOGIN = REDIRECT + LOGIN;
 

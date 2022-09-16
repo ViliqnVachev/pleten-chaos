@@ -2,11 +2,12 @@ package com.pletenchaos.pletenchaos.service.interfaces;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.pletenchaos.pletenchaos.model.binding.MaterialBinding;
+import com.pletenchaos.pletenchaos.model.binding.UpdateMaterialBinding;
 
 public interface IMaterialService {
-
-	boolean isUnique(String name);
 
 	boolean addMaterial(MaterialBinding binding, String userName);
 
@@ -17,5 +18,7 @@ public interface IMaterialService {
 	MaterialBinding getMaterialById(Long id);
 
 	void deleteMaterial(Long id);
+
+	void updateMaterial(Long id, @Valid UpdateMaterialBinding updatedMaterial);
 
 }
