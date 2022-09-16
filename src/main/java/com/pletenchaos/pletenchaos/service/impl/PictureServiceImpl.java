@@ -56,8 +56,11 @@ public class PictureServiceImpl implements IPictureService {
 	}
 
 	@Override
-	public void deletePicture(String publicId) {
-		cloudinary.delete(publicId);
+	public void deletePicture(Long pictureId) {
+		PictureEntity picture = pictureRepository.findById(pictureId)
+				.orElseThrow(() -> new NotFoundEntity(String.format("Picture with id %s is not found!", pictureId)));
+		pictureRepository.deleteById(pictureId);
+		cloudinary.delete(picture.getPublicId());
 	}
 
 }

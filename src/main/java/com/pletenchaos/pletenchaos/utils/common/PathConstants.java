@@ -16,6 +16,8 @@ public final class PathConstants {
 
 	public static final String ADD_MATERIAL = "/add";
 
+	public static final String DELETE_MATERIAL = "/delete" + ID;
+
 	public static final String AVAILABLE_MATERIAL = "/available";
 
 	public static final String LOGIN_ERROR = "/login-error";

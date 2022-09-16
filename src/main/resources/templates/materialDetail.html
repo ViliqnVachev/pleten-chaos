@@ -2,8 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/common::head"></head>
+<head>
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="/css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="/css/style.css"> <!-- Resource style -->
+	<script src="/js/modernizr.js"></script> <!-- Modernizr -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+	<script src="js/modernizr.js"></script> <!-- Modernizr -->
+
+	<title>Secondary Sliding Navigation | CodyHouse</title>
+</head>
 <body>
-	
+	<header th:replace="fragments/common::navigation"> </header>
 	<div class="limiter">
 		<div class="container-login100">
 			<div th:object="${material}" class="wrap-login100">
@@ -66,27 +83,32 @@
 						<button class="save-form-btn">
 							Save
 						</button>
-						<button class="delete-form-btn">
+						<button th:attr="data-material=${material.getId()}" class="delete-form-btn">
 							Delete
 						</button>
 					</div>
 				</form>
+<!-- 				<form action="" class="login100-form"> -->
+<!-- 					<div class="details"> -->
+<!-- 						<button class="delete-form-btn"> -->
+<!-- 							Delete -->
+<!-- 						</button> -->
+<!-- 					</div>				 -->
+<!-- 				</form> -->
 			</div>
 		</div>
 	</div>
-	
-	
 
 	
 <!--===============================================================================================-->	
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/vendor/bootstrap/js/popper.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
+	<script src="/vendor/select2/select2.min.js"></script>
 <!--===============================================================================================-->
-	<script src="vendor/tilt/tilt.jquery.min.js"></script>
+	<script src="/vendor/tilt/tilt.jquery.min.js"></script>
 	<script >
 		$('.js-tilt').tilt({
 			scale: 1.1
@@ -94,8 +116,10 @@
 	</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+	<script src="/js/mainNav.js"></script> 
 	<script th:src="@{/js/calclulate.js}"></script>
 	<script th:src="@{/js/edit.js}"></script>
 
 </body>
+
 </html>

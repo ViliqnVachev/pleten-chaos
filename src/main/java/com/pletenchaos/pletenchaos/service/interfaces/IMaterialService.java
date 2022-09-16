@@ -16,4 +16,6 @@ public interface IMaterialService {
 
 	MaterialBinding getMaterialById(Long id);
 
+	void deleteMaterial(Long id);
+
 }

@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,6 +56,21 @@ public class MaterialController {
 		return Views.MATERILA_DETAIL;
 	}
 
+	@PreAuthorize("@materialServiceImpl.isOwner(#principal.name, #id)")
+	@DeleteMapping(PathConstants.DELETE_MATERIAL)
+	public String deleteMaterial(@PathVariable Long id) {
+		materialService.deleteMaterial(id);
+		return PathConstants.REDIRECT_AVAILABLE_MATERIAL;
+	}
+
+//	@PreAuthorize("@materialServiceImpl.isOwner(#principal.name, #id)")
+//	@PutMapping(PathConstants.ID)
+//	public String updateMaterial(@PathVariable Long id, Model model) {
+//		MaterialBinding material = materialService.getMaterialById(id);
+//		model.addAttribute("material", material);
+//		return Views.MATERILA_DETAIL;
+//	}
+
 	@PostMapping(PathConstants.ADD_MATERIAL)
 	public String addMaterial(@Valid MaterialBinding materialBinding, BindingResult bindingResult,
 			RedirectAttributes attributes, @AuthenticationPrincipal User user) {
@@ -63,7 +79,7 @@ public class MaterialController {
 		if (bindingResult.hasErrors()
 				|| !MaterialValidatorUtil.isValid(attributes, materialBinding, bindingResult, materialService)) {
 			attributes.addFlashAttribute("materialBinding", materialBinding)//
-					.addFlashAttribute("org.springframework.validation.BindingResult.newMaterialBinding",
+					.addFlashAttribute("org.springframework.validation.BindingResult.materialBinding",
 							bindingResult);
 			return PathConstants.REDIRECT_ADD_MATERIAL;
 		}

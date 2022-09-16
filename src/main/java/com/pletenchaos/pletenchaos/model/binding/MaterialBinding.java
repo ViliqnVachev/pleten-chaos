@@ -19,14 +19,14 @@ public class MaterialBinding extends BaseBindingModel {
 	private LocalDate date;
 
 	@NotNull
-	@DecimalMin("0.0")
+	@DecimalMin("0.1")
 	private Double price;
 
 	@NotNull
-	@DecimalMin("0.0")
+	@DecimalMin("0.1")
 	private Double quantity;
 
-	@DecimalMin("0.0")
+	@DecimalMin("0.1")
 	private Double totalPrice;
 
 	@NotNull
