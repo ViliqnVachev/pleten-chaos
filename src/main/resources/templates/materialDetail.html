@@ -21,16 +21,16 @@
 </head>
 <body>
 	<header th:replace="fragments/common::navigation"> </header>
+	<main class="cd-main-content">
 	<div class="limiter">
 		<div class="container-login100">
-			<div th:object="${material}" class="wrap-login100">
+			<div th:object="${materialBinding}" class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
 					<img th:src="*{pictureUrl}" alt="IMG">
 				</div>
 
-				<form id="detailForm" th:action=@{/login} th:method="put" class="login100-form">
+				<form id="detailForm" th:action=@{/material/update/{id}(id=*{id})} th:method="put" class="login100-form">
 					<span th:text="*{name}" class="login100-form-title">
-						Material Name
 					</span>
 
 					<small th:if="${isNotUnique}" class="error">The material already exits</small>
@@ -41,8 +41,9 @@
 							<i class="fa fa-info" aria-hidden="true"></i>
 						</span>
 					</div>
-
-
+					
+					<input th:field="*{pictureUrl}" style="display:none">
+	
 					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('date')} ? 'alert-validate' : ''" data-validate = "Valid date is required">
 						<input th:field="*{date}" class="input100" readonly type="date" name="date" placeholder="Date">
 						<span class="focus-input100"></span>						
@@ -83,22 +84,21 @@
 						<button class="save-form-btn">
 							Save
 						</button>
-						<button th:attr="data-material=${material.getId()}" class="delete-form-btn">
+						<th:block th:if="${canDelete}">
+						<button id="delete" th:attr="data-material=${materialBinding.getId()}" class="delete-form-btn">
 							Delete
 						</button>
+						</th:block>
+						<th:block th:if="${canDelete}==false">
+						<a th:href="@{/material/available}" class="delete-form-btn"> Cencel
+						</a>
+						</th:block>
 					</div>
 				</form>
-<!-- 				<form action="" class="login100-form"> -->
-<!-- 					<div class="details"> -->
-<!-- 						<button class="delete-form-btn"> -->
-<!-- 							Delete -->
-<!-- 						</button> -->
-<!-- 					</div>				 -->
-<!-- 				</form> -->
 			</div>
 		</div>
 	</div>
-
+	</main>
 	
 <!--===============================================================================================-->	
 	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -115,8 +115,8 @@
 		})
 	</script>
 <!--===============================================================================================-->
-	<script src="js/main.js"></script>
-	<script src="/js/mainNav.js"></script> 
+	<script src="/js/jquery-2.1.1.js"></script>
+	<script src="/js/mainNav.js"></script> <!-- Resource jQuery -->
 	<script th:src="@{/js/calclulate.js}"></script>
 	<script th:src="@{/js/edit.js}"></script>
 

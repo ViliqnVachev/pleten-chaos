@@ -382,11 +382,11 @@ iframe {
   display: -webkit-inline-box;
   display: -moz-box;
   display: -ms-inline-flexbox;
-  display: inline;
+  display: flex;
   justify-content: center;
   align-items: center;
   padding: 0 25px;
-
+  text-align: center;
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;

@@ -6,7 +6,7 @@ let url =`${protocol}//${host}`;
 
 function edit() {
     let editBtn = document.querySelector('.edit-form-btn');
-    let deleteBtn = document.querySelector('.delete-form-btn');
+    let deleteBtn = document.querySelector('#delete');
     editBtn.addEventListener('click', update);
     deleteBtn.addEventListener('click', deleteMaterial);
 }
@@ -16,12 +16,13 @@ function update(event) {
     let form = document.querySelector('#detailForm');
     event.preventDefault();
     inputs.forEach(element => {
-        element.readOnly = false;
+    	if(element.name!=='totalPrice'){
+    		element.readOnly = false;
+    	}
     });
     form.classList.add('validate-form');
-    // hide edint btn
 
-    // show save btn
+    // hide edit btn and show save btn
     let saveBtn = document.querySelector('.save-form-btn');
     saveBtn.style.display='inline';
     event.target.style.display='none';

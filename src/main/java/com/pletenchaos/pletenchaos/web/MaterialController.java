@@ -2,6 +2,7 @@ package com.pletenchaos.pletenchaos.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pletenchaos.pletenchaos.model.binding.MaterialBinding;
+import com.pletenchaos.pletenchaos.model.binding.UpdateMaterialBinding;
 import com.pletenchaos.pletenchaos.service.interfaces.IMaterialService;
 import com.pletenchaos.pletenchaos.utils.common.PathConstants;
 import com.pletenchaos.pletenchaos.utils.common.Views;
@@ -28,6 +31,8 @@ import com.pletenchaos.pletenchaos.utils.validators.users.MaterialValidatorUtil;
 @Controller
 @RequestMapping(PathConstants.MATERIAL)
 public class MaterialController {
+
+	private static final String MATERIAL_BINDING = "materialBinding";
 
 	private final IMaterialService materialService;
 
@@ -50,9 +55,8 @@ public class MaterialController {
 
 	@PreAuthorize("@materialServiceImpl.isOwner(#principal.name, #id)")
 	@GetMapping(PathConstants.ID)
-	public String getMaterial(@PathVariable Long id, Model model) {
-		MaterialBinding material = materialService.getMaterialById(id);
-		model.addAttribute("material", material);
+	public String getMaterial(@PathVariable Long id, Model model, HttpServletRequest request) {
+		MaterialValidatorUtil.validateView(model, materialService, MATERIAL_BINDING, id);
 		return Views.MATERILA_DETAIL;
 	}
 
@@ -63,29 +67,34 @@ public class MaterialController {
 		return PathConstants.REDIRECT_AVAILABLE_MATERIAL;
 	}
 
-//	@PreAuthorize("@materialServiceImpl.isOwner(#principal.name, #id)")
-//	@PutMapping(PathConstants.ID)
-//	public String updateMaterial(@PathVariable Long id, Model model) {
-//		MaterialBinding material = materialService.getMaterialById(id);
-//		model.addAttribute("material", material);
-//		return Views.MATERILA_DETAIL;
-//	}
+	@PreAuthorize("@materialServiceImpl.isOwner(#principal.name, #id)")
+	@PutMapping(PathConstants.UPDATE_MATERIAL)
+	public String updateMaterial(@PathVariable Long id, @Valid UpdateMaterialBinding updatedMaterial,
+			BindingResult bindingResult, RedirectAttributes attributes) {
+
+		// check for errors
+		if (bindingResult.hasErrors()) {
+			attributes.addFlashAttribute(MATERIAL_BINDING, updatedMaterial)//
+					.addFlashAttribute("org.springframework.validation.BindingResult.materialBinding", bindingResult);
+			return PathConstants.REDIRECT_MATERIAL_DETAIL.replace("{id}", String.valueOf(id));
+		}
+		materialService.updateMaterial(id, updatedMaterial);
+		return PathConstants.REDIRECT_AVAILABLE_MATERIAL;
+	}
 
 	@PostMapping(PathConstants.ADD_MATERIAL)
 	public String addMaterial(@Valid MaterialBinding materialBinding, BindingResult bindingResult,
 			RedirectAttributes attributes, @AuthenticationPrincipal User user) {
 
 		// check for errors
-		if (bindingResult.hasErrors()
-				|| !MaterialValidatorUtil.isValid(attributes, materialBinding, bindingResult, materialService)) {
-			attributes.addFlashAttribute("materialBinding", materialBinding)//
-					.addFlashAttribute("org.springframework.validation.BindingResult.materialBinding",
-							bindingResult);
+		if (bindingResult.hasErrors()) {
+			attributes.addFlashAttribute(MATERIAL_BINDING, materialBinding)//
+					.addFlashAttribute("org.springframework.validation.BindingResult.materialBinding", bindingResult);
 			return PathConstants.REDIRECT_ADD_MATERIAL;
 		}
 
 		// TODO: check for errors
-		if(	!materialService.addMaterial(materialBinding, user.getUsername())) {
+		if (!materialService.addMaterial(materialBinding, user.getUsername())) {
 			return null;
 		}
 
