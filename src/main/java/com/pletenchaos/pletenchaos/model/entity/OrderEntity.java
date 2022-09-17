@@ -18,6 +18,9 @@ import com.pletenchaos.pletenchaos.model.entity.enums.StatusEnum;
 @Table(name = "orders")
 public class OrderEntity extends BaseEntity {
 
+	@Column(nullable = false)
+	private String name;
+
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private StatusEnum status;

@@ -41,7 +41,7 @@ public class MaterialController {
 		this.materialService = materialService;
 	}
 
-	@GetMapping(PathConstants.ADD_MATERIAL)
+	@GetMapping(PathConstants.ADD)
 	public String getMaterialView() {
 		return Views.ADD_MATERIAL_VIEW;
 	}
@@ -82,7 +82,7 @@ public class MaterialController {
 		return PathConstants.REDIRECT_AVAILABLE_MATERIAL;
 	}
 
-	@PostMapping(PathConstants.ADD_MATERIAL)
+	@PostMapping(PathConstants.ADD)
 	public String addMaterial(@Valid MaterialBinding materialBinding, BindingResult bindingResult,
 			RedirectAttributes attributes, @AuthenticationPrincipal User user) {
 

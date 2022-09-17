@@ -28,14 +28,13 @@
 		<div class="container-login100">
 			<div class="center-register">
 
-				<form th:method="post" th:action="@{/material/add}" th:object="${materialBinding}" class="login100-form validate-form" enctype="multipart/form-data">
+				<form th:method="post" th:action="@{/order/add}" th:object="${materialBinding}" class="login100-form validate-form" enctype="multipart/form-data">
 					<span class="login100-form-title">
-						Add Material
+						Add Order
 					</span>
 
-					<small th:if="${isNotUnique}" class="error">The material already exits</small>
-					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('name')} ? 'alert-validate' : ''" data-validate = "Material Name is required">
-						<input th:field="*{name}" class="input100" type="text" name="mname" placeholder="Material Name">
+					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('name')} ? 'alert-validate' : ''" data-validate = "Name is required">
+						<input th:field="*{name}" class="input100" type="text" name="mname" placeholder="Product Name">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-info" aria-hidden="true"></i>
@@ -44,7 +43,7 @@
 
 
 					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('date')} ? 'alert-validate' : ''" data-validate = "Valid date is required">
-						<input th:field="*{date}" class="input100" type="date" name="date" placeholder="Date">
+						<input th:field="*{date}" class="input100" type="date" name="date" placeholder="End Date">
 						<span class="focus-input100"></span>						
 						<span class="symbol-input100">
 							<i class="fa fa-calendar" aria-hidden="true"></i>
@@ -52,45 +51,21 @@
 					</div>
 
 
-					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('price')} ? 'alert-validate' : ''" data-validate = "Single Price is required">
-						<input id="singlePrice" th:field="*{price}" class="input100" type="number" min="0" step=".01" name="price" placeholder="Single Price">
+					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('price')} ? 'alert-validate' : ''" data-validate = "Price is required">
+						<input id="singlePrice" th:field="*{price}" class="input100" type="number" min="0" step=".01" name="price" placeholder="Price">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-dollar" aria-hidden="true"></i>
-						</span>
-					</div>
-
-					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('quantity')} ? 'alert-validate' : ''"  data-validate = "Quantity is required">
-						<input id="quantity" th:field="*{quantity}" class="input100" type="number" min="1" name="quantity" placeholder="Quantity">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-plus" aria-hidden="true"></i>
-						</span>
-					</div>
-
-					<div class="wrap-input100" >
-						<input th:field="*{totalPrice}" class="input100" type="number" step=".01" readonly name="total" placeholder="Total price">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-dollar" aria-hidden="true"></i>
-						</span>
-					</div>
-
-					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('picture')} ? 'alert-validate' : ''" data-validate = "Picture is required">
-						<input th:field="*{picture}" id="img" class="input100" type="file" name="picture">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-image" aria-hidden="true"></i>
 						</span>
 					</div>
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
-							Add Material
+							Add Order
 						</button>
 					</div>
 					<div class="container-login100-form-btn">
-						<a class="txt2" th:href="@{/material/available}">
+						<a class="txt2" th:href="@{/order/available}">
 								Back
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
@@ -120,7 +95,6 @@
 	<!--===============================================================================================-->
 	<script src="/js/jquery-2.1.1.js"></script>
 	<script src="/js/mainNav.js"></script> <!-- Resource jQuery -->
-	<script th:src="@{/js/calclulate.js}"></script>
 </body>
 
 </html>

@@ -14,7 +14,9 @@ public final class PathConstants {
 
 	public static final String MATERIAL = "/material";
 
-	public static final String ADD_MATERIAL = "/add";
+	public static final String ORDER = "/order";
+
+	public static final String ADD = "/add";
 
 	public static final String DELETE_MATERIAL = "/delete" + ID;
 
@@ -30,7 +32,7 @@ public final class PathConstants {
 
 	public static final String REDIRECT_MATERIAL = REDIRECT + MATERIAL;
 
-	public static final String REDIRECT_ADD_MATERIAL = REDIRECT_MATERIAL + ADD_MATERIAL;
+	public static final String REDIRECT_ADD_MATERIAL = REDIRECT_MATERIAL + ADD;
 
 	public static final String REDIRECT_AVAILABLE_MATERIAL = REDIRECT_MATERIAL + AVAILABLE_MATERIAL;
 
