@@ -42,7 +42,7 @@ public class MaterialController {
 	}
 
 	@GetMapping(PathConstants.ADD)
-	public String getMaterialView() {
+	public String getAddMaterialView() {
 		return Views.ADD_MATERIAL_VIEW;
 	}
 
