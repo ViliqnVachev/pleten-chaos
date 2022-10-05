@@ -2,7 +2,7 @@ package com.pletenchaos.pletenchaos.model.binding;
 
 import com.pletenchaos.pletenchaos.model.entity.enums.RoleEnum;
 
-public class RoleBinding extends BaseBindingModel {
+public class RoleBinding extends BaseModel {
 
 	private RoleEnum role;
 

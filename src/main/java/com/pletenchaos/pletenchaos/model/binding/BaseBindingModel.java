@@ -1,18 +1,72 @@
 package com.pletenchaos.pletenchaos.model.binding;
 
-public abstract class BaseBindingModel {
+import java.time.LocalDate;
 
-	private Long id;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+public abstract class BaseBindingModel extends BaseModel {
+	@NotBlank
+	private String name;
+
+	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate date;
+
+	@NotNull
+	@DecimalMin("0.1")
+	private Double price;
+
+	@NotNull
+	@DecimalMin("0.1")
+	private Double quantity;
+
+	@DecimalMin("0.1")
+	private Double totalPrice;
 
 	public BaseBindingModel() {
 	}
 
-	public Long getId() {
-		return id;
+	public String getName() {
+		return name;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setName(String name) {
+		this.name = name;
 	}
 
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Double getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Double quantity) {
+		this.quantity = quantity;
+	}
+
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 }

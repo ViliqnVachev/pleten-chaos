@@ -227,6 +227,19 @@ iframe {
   padding-bottom: 54px;
 }
 
+.order-form-material {
+  font-family: Poppins-Bold;
+  font-size: 18px;
+  color: #333333;
+  line-height: 1.2;
+  text-align: center;
+
+  width: 100%;
+  display: block;
+  padding-top: 25px;
+  padding-bottom: 10px;
+}
+
 
 /*---------------------------------------------*/
 .wrap-input100 {
@@ -244,6 +257,34 @@ iframe {
 
   display: block;
   width: 100%;
+  background: #e6e6e6;
+  height: 50px;
+  border-radius: 25px;
+  padding: 0 30px 0 68px;
+}
+
+.input50 {
+  font-family: Poppins-Medium;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #666666;
+
+  display: none;
+  width: 25%;
+  background: #e6e6e6;
+  height: 50px;
+  border-radius: 25px;
+  padding: 0 15px 0 15px;
+}
+
+.input25 {
+  font-family: Poppins-Medium;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #666666;
+
+  display: inline-flex;
+  width: 67%;
   background: #e6e6e6;
   height: 50px;
   border-radius: 25px;

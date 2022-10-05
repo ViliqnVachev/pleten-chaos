@@ -28,7 +28,7 @@
 		<div class="container-login100">
 			<div class="center-register">
 
-				<form th:method="post" th:action="@{/order/add}" th:object="${materialBinding}" class="login100-form validate-form" enctype="multipart/form-data">
+				<form th:method="post" th:action="@{/order/add}" th:object="${orderBinding}" class="login100-form validate-form" enctype="multipart/form-data">
 					<span class="login100-form-title">
 						Add Order
 					</span>
@@ -58,6 +58,32 @@
 							<i class="fa fa-dollar" aria-hidden="true"></i>
 						</span>
 					</div>
+					
+					<div class="wrap-input100 validate-input" th:classappend="${#fields.hasErrors('quantity')} ? 'alert-validate' : ''"  data-validate = "Quantity is required">
+						<input id="quantity" th:field="*{quantity}" class="input100" type="number" min="1" name="quantity" placeholder="Quantity">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-plus" aria-hidden="true"></i>
+						</span>
+					</div>					
+					
+					<div class="wrap-input100" >
+						<input th:field="*{totalPrice}" class="input100" type="number" step=".01" readonly name="total" placeholder="Total price">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-dollar" aria-hidden="true"></i>
+						</span>
+					</div>	
+					
+					<span class="order-form-material">
+						Materials:
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Material is required">
+						<input class="input25" type="text" name="mname" placeholder="Material">
+						<input 	type="checkbox"> 
+						<input class="input50" type="number" min="0.1" step=".10" placeholder="Quantity">
+					</div>				
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
@@ -95,6 +121,8 @@
 	<!--===============================================================================================-->
 	<script src="/js/jquery-2.1.1.js"></script>
 	<script src="/js/mainNav.js"></script> <!-- Resource jQuery -->
+	<script th:src="@{/js/calclulate.js}"></script>
+	<script th:src="@{/js/enable-quantity.js}"></script>
 </body>
 
 </html>

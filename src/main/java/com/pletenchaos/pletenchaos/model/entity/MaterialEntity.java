@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
 
 @Entity
 @Table(name = "materials")
@@ -18,12 +19,15 @@ public class MaterialEntity extends BaseEntity {
 	@Column(nullable = false)
 	private String name;
 
+	@DecimalMin("0.1")
 	@Column(nullable = false)
 	private Double quantity;
 
+	@DecimalMin("0.1")
 	@Column(nullable = false)
 	private Double price;
 
+	@DecimalMin("0.1")
 	@Column(nullable = false)
 	private Double totalPrice;
 

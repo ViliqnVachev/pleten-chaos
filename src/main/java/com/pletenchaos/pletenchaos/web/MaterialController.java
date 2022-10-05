@@ -105,5 +105,4 @@ public class MaterialController {
 	public MaterialBinding materialBinding() {
 		return new MaterialBinding();
 	}
-
 }

@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
 
 import com.pletenchaos.pletenchaos.model.entity.enums.StatusEnum;
 
@@ -25,8 +26,17 @@ public class OrderEntity extends BaseEntity {
 	@Column(nullable = false)
 	private StatusEnum status;
 
+	@DecimalMin("0.1")
 	@Column(nullable = false)
 	private Double price;
+
+	@DecimalMin("0.1")
+	@Column(nullable = false)
+	private Double totalPrice;
+
+	@DecimalMin("0.1")
+	@Column(nullable = false)
+	private Double quantity;
 
 	@Column(nullable = false)
 	private LocalDate date;
@@ -38,6 +48,14 @@ public class OrderEntity extends BaseEntity {
 	private UserEntity creator;
 
 	public OrderEntity() {
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public StatusEnum getStatus() {
@@ -80,4 +98,19 @@ public class OrderEntity extends BaseEntity {
 		this.creator = creator;
 	}
 
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public Double getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Double quantity) {
+		this.quantity = quantity;
+	}
 }
