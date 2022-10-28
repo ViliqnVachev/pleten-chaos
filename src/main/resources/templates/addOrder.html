@@ -78,13 +78,11 @@
 					<span class="order-form-material">
 						Materials:
 					</span>
-
-					<div class="wrap-input100 validate-input" data-validate = "Material is required">
-						<input class="input25" type="text" name="mname" placeholder="Material">
+					<div th:each="pr, stat : ${orderBinding.materials}" class="wrap-input100 validate-input" data-validate = "Material is required">
+						<input class="input25" type="text" name="mname" th:field="*{materials[__${stat.index}__].name}" th:value=*{materials[__${stat.index}__].name} placeholder="Material">
 						<input 	type="checkbox"> 
-						<input class="input50" type="number" min="0.1" step=".10" placeholder="Quantity">
+						<input class="input50" type="number" th:field="*{materials[__${stat.index}__].quantity}" th:value=*{materials[__${stat.index}__].quantity} th:max=*{materials[__${stat.index}__].quantity} min="0.1" step=".10" placeholder="Quantity">
 					</div>				
-
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							Add Order

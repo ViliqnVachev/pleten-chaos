@@ -15,7 +15,7 @@ import com.pletenchaos.pletenchaos.model.binding.NewUserBinding;
 import com.pletenchaos.pletenchaos.service.interfaces.IUserService;
 import com.pletenchaos.pletenchaos.utils.common.PathConstants;
 import com.pletenchaos.pletenchaos.utils.common.Views;
-import com.pletenchaos.pletenchaos.utils.validators.users.UserValidatorUtil;
+import com.pletenchaos.pletenchaos.utils.validators.objects.ObjectValidator;
 import com.pletenchaos.pletenchaos.web.events.EmailEvent;
 
 @Controller
@@ -38,7 +38,8 @@ public class RegisterController {
 	public String register(@Valid NewUserBinding newUser, BindingResult bindingResult, RedirectAttributes attributes) {
 
 		// check for errors
-		if (bindingResult.hasErrors() || !UserValidatorUtil.isValid(attributes, newUser, bindingResult, userService)) {
+		if (bindingResult.hasErrors()
+				|| !ObjectValidator.validateUser(attributes, newUser, bindingResult, userService)) {
 			attributes.addFlashAttribute("newUserBinding", newUser)//
 					.addFlashAttribute("org.springframework.validation.BindingResult.newUserBinding", bindingResult);
 			return PathConstants.REDIRECT_REGISTER;

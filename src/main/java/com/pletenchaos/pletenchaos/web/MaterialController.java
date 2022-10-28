@@ -26,7 +26,7 @@ import com.pletenchaos.pletenchaos.model.binding.UpdateMaterialBinding;
 import com.pletenchaos.pletenchaos.service.interfaces.IMaterialService;
 import com.pletenchaos.pletenchaos.utils.common.PathConstants;
 import com.pletenchaos.pletenchaos.utils.common.Views;
-import com.pletenchaos.pletenchaos.utils.validators.users.MaterialValidatorUtil;
+import com.pletenchaos.pletenchaos.utils.validators.views.ViewValidator;
 
 @Controller
 @RequestMapping(PathConstants.MATERIAL)
@@ -56,7 +56,7 @@ public class MaterialController {
 	@PreAuthorize("@materialServiceImpl.isOwner(#principal.name, #id)")
 	@GetMapping(PathConstants.ID)
 	public String getMaterial(@PathVariable Long id, Model model, HttpServletRequest request) {
-		MaterialValidatorUtil.validateView(model, materialService, MATERIAL_BINDING, id);
+		ViewValidator.validateMaterialView(model, materialService, MATERIAL_BINDING, id);
 		return Views.MATERILA_DETAIL;
 	}
 

@@ -32,7 +32,11 @@ public final class PathConstants {
 
 	public static final String REDIRECT_MATERIAL = REDIRECT + MATERIAL;
 
+	public static final String REDIRECT_ORDER = REDIRECT + ORDER;
+
 	public static final String REDIRECT_ADD_MATERIAL = REDIRECT_MATERIAL + ADD;
+
+	public static final String REDIRECT_ADD_ORDER = REDIRECT_ORDER + ADD;
 
 	public static final String REDIRECT_AVAILABLE_MATERIAL = REDIRECT_MATERIAL + AVAILABLE_MATERIAL;
 
